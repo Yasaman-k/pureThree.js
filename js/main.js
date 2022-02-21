@@ -6,16 +6,24 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000);
 
-
 scene.add(camera)
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial
-    ({ color: 0x11ff11 });
+// const geometry = new THREE.ConeGeometry(2,4,5670);
+// const geometry = new THREE.SphereGeometry();
+
+const texture = new THREE.TextureLoader().load('images/park.jpg');
+
+const geometry = new THREE.BoxGeometry()
+const material = new THREE.MeshBasicMaterial(
+    {
+        color: 0x1E7BFD3,
+        map: texture
+    }
+);
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
