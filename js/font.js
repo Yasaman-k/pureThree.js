@@ -1,32 +1,14 @@
 
-const scene = new THREE.Scene();
+// import * as THREE from 'three';
 
-const camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    1,
-    500
-);
-camera.position.set(0, 0, 80);
-camera.lookAt(0, 0, 0);
+import { OrbitControls } from './jsm/controls/OrbitControls.js';
+import { FontLoader } from '/jm/loaders/FontLoader.js';
 
-scene.add(camera)
+const loader = new THREE.FontLoader();
 
-const renderer = new THREE.WebGLRenderer();
+loader.load('/fonts/helvetiker_regular.typeface.json', function (font) {
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-const points = [];
-points.push(new THREE.Vector3(0, 0, 0));
-points.push(new THREE.Vector3(0, 20, 0));
-points.push(new THREE.Vector3(10, -10, 10));
-
-const loader = new FontLoader();
-
-loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-
-    const geometry = new TextGeometry('Hello three.js!', {
+    const geometry = new TextBufferGeometry('Hello three.js!', {
         font: font,
         size: 80,
         height: 5,
@@ -37,26 +19,43 @@ loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
         bevelOffset: 0,
         bevelSegments: 5
     });
+    console.log(geometry);
+    const material = new THREE.MeshBasicMaterial(
+        {
+            color: 0x1E7BFD3
+        }
+    );
+    const text = new THREE.Mesh(geometry, material);
+    scene.add(text);
 });
 
-const material = new THREE.LineBasicMaterial(
-    {
-        color: 0x1E7BFD3
-    }
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    1,
+    500
 );
-const text = new THREE.Mesh(geometry, material);
-scene.add(text);
+
+camera.position.set(0, 0, 80);
+camera.lookAt(0, 0, 0);
+
+scene.add(camera)
+
+// const renderer = new THREE.WebGLRenderer({canvas:});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
 // camera.position.z =3
 
 function animate() {
     requestAnimationFrame(animate);
-
     // line.rotation.x += 0;
     // line.rotation.y += 0.006;
     // line.rotation.z += 0.006;
-
-
     renderer.render(scene, camera);
 };
 

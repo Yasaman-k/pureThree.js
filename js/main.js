@@ -22,7 +22,7 @@ const texture = new THREE.TextureLoader().load('images/park.jpg');
 // texture.wrapT = THREE.RepeatWrapping;
 // texture.repeat.set(4, 4);
 
-const Moontexture = new THREE.TextureLoader().load('images/moon.jpg');
+// const Moontexture = new THREE.TextureLoader().load('images/moon.jpg');
 
 const geometry = new THREE.BoxGeometry()
 const material = new THREE.MeshBasicMaterial(
